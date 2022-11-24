@@ -1,49 +1,52 @@
 ﻿
-static void GetLimits(out int lim1, out int lim2)
+static bool ReadLimit(out int limit, string message)
+{
+    Console.WriteLine(message);
+    return Int32.TryParse(Console.ReadLine(), out limit);
+}
+
+static void GetLimits(out int lowerLimit, out int upperLimit)
 {
     while (true)
     {
-        bool isInt1 = false, isInt2 = false;
-        Console.WriteLine("Limita interval 1: ");
-        isInt1 = Int32.TryParse(Console.ReadLine(), out lim1);
-        Console.WriteLine("Limita interval 2: ");
-        isInt2 = Int32.TryParse(Console.ReadLine(), out lim2);
+        bool isLowerLimitValid = false, isUpperLimitValid = false;
+        isLowerLimitValid = ReadLimit(out lowerLimit, "Limita interval 1: ");
+        isUpperLimitValid = ReadLimit(out upperLimit, "Limita interval 2: ");
 
-        if (isInt1 && isInt2)
+        if (isLowerLimitValid && isUpperLimitValid)
             break;
         else Console.WriteLine("Input incorect! Incearca din nou.");
     }
 
-    if (lim2 < lim1)
-        (lim1, lim2) = (lim2, lim1);
+    if (upperLimit < lowerLimit)
+        (lowerLimit, upperLimit) = (upperLimit, lowerLimit); // Swap
 }
 
-int lim1, lim2, randNum;
-var rand = new Random();
+int lowerLimit, upperLimit, randomNumber;
+var random = new Random();
 
-GetLimits(out lim1, out lim2);
-randNum = rand.Next(lim1, lim2 + 1);
+GetLimits(out lowerLimit, out upperLimit);
+randomNumber = random.Next(lowerLimit, upperLimit + 1);
 
 Console.WriteLine("Ghiceste numarul din interval.");
 
 while (true)
 {
-    //bool nIsValid = false;
-    int n;
-    if (Int32.TryParse(Console.ReadLine(), out n))
+    int readValue;
+    if (Int32.TryParse(Console.ReadLine(), out readValue))
     {
-        if (n == randNum)
+        if (readValue == randomNumber)
         {
-            Console.WriteLine("Valoarea {0} este cea corecta!", n);
+            Console.WriteLine("Valoarea {0} este cea corecta!", readValue);
             break;
         }
-        else if (n > randNum)
+        else if (readValue > randomNumber)
         {
-            Console.WriteLine("Valoarea {0} este prea mare.", n);
+            Console.WriteLine("Valoarea {0} este prea mare.", readValue);
         }
         else
         {
-            Console.WriteLine("Valoarea {0} este prea mica.", n);
+            Console.WriteLine("Valoarea {0} este prea mica.", readValue);
         }
     }
     else Console.WriteLine("Input incorect! Incearca din nou.");
