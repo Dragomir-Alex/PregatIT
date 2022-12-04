@@ -1,32 +1,15 @@
-﻿
-static bool ReadLimit(out int limit, string message)
+﻿using TemaPractica1;
+
+static int generateRandomInt(int lowerLimit, int upperLimit)
 {
-    Console.WriteLine(message);
-    return Int32.TryParse(Console.ReadLine(), out limit);
+    var random = new Random();
+    return random.Next(lowerLimit, upperLimit + 1);
 }
 
-static void GetLimits(out int lowerLimit, out int upperLimit)
-{
-    while (true)
-    {
-        bool isLowerLimitValid = false, isUpperLimitValid = false;
-        isLowerLimitValid = ReadLimit(out lowerLimit, "Limita interval 1: ");
-        isUpperLimitValid = ReadLimit(out upperLimit, "Limita interval 2: ");
+var integerInterval = new IntegerInterval();
+integerInterval = IntegerIntervalReader.ReadInterval();
 
-        if (isLowerLimitValid && isUpperLimitValid)
-            break;
-        else Console.WriteLine("Input incorect! Incearca din nou.");
-    }
-
-    if (upperLimit < lowerLimit)
-        (lowerLimit, upperLimit) = (upperLimit, lowerLimit); // Swap
-}
-
-int lowerLimit, upperLimit, randomNumber;
-var random = new Random();
-
-GetLimits(out lowerLimit, out upperLimit);
-randomNumber = random.Next(lowerLimit, upperLimit + 1);
+var randomNumber = generateRandomInt(integerInterval.LowerLimit, integerInterval.UpperLimit);
 
 Console.WriteLine("Ghiceste numarul din interval.");
 
