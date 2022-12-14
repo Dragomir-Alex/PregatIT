@@ -9,6 +9,7 @@ namespace TemaPractica1
             int lim1, lim2, randNum;
             var rand = new Random();
 
+            // validare, text mesaje
             Console.WriteLine("Limita interval 1: ");
             lim1 = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Limita interval 2: ");
