@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TemaPractica1
 {
+    // validare, text mesaje
     public class IntegerInterval
     {
         private int lowerLimit;
