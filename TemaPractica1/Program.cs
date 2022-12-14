@@ -15,7 +15,7 @@ namespace TemaPractica1
             lim2 = Convert.ToInt32(Console.ReadLine());
 
             if (lim2 < lim1)
-                (lim1, lim2) = (lim2, lim1);
+                (lim1, lim2) = (lim2, lim1); // Nice
             randNum = rand.Next(lim1, lim2 + 1);
 
             Console.WriteLine("Ghiceste numarul din interval.");
