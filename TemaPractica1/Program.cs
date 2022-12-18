@@ -1,43 +1,39 @@
-﻿using System;
+﻿using TemaPractica1;
 
-namespace TemaPractica1
+// methods are usually placed in the order of their call
+static int generateRandomInt(int lowerLimit, int upperLimit)
 {
-    internal class Program
+    var random = new Random();
+    return random.Next(lowerLimit, upperLimit + 1);
+}
+
+// Automatically changing the limits in case the lower limit is higher than upper limit could be confusing
+// Nice to see the need of a Interval class
+var integerInterval = new IntegerInterval();
+integerInterval = IntegerIntervalReader.ReadInterval();
+
+var randomNumber = generateRandomInt(integerInterval.LowerLimit, integerInterval.UpperLimit);
+
+Console.WriteLine("Ghiceste numarul din interval.");
+
+while (true)
+{
+    int readValue;
+    if (Int32.TryParse(Console.ReadLine(), out readValue))
     {
-        static void Main(string[] args)
+        if (readValue == randomNumber)
         {
-            int lim1, lim2, randNum;
-            var rand = new Random();
-
-            // validare, text mesaje
-            Console.WriteLine("Limita interval 1: ");
-            lim1 = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Limita interval 2: ");
-            lim2 = Convert.ToInt32(Console.ReadLine());
-
-            if (lim2 < lim1)
-                (lim1, lim2) = (lim2, lim1); // Nice
-            randNum = rand.Next(lim1, lim2 + 1);
-
-            Console.WriteLine("Ghiceste numarul din interval.");
-
-            while (true)
-            {
-                int n = Convert.ToInt32(Console.ReadLine());
-                if (n == randNum)
-                {
-                    Console.WriteLine("Valoarea {0} este cea corecta!", n);
-                    break;
-                }
-                else if (n > randNum)
-                {
-                    Console.WriteLine("Valoarea {0} este prea mare.", n);
-                }
-                else
-                {
-                    Console.WriteLine("Valoarea {0} este prea mica.", n);
-                }
-            }
+            Console.WriteLine("Valoarea {0} este cea corecta!", readValue);
+            break;
+        }
+        else if (readValue > randomNumber)
+        {
+            Console.WriteLine("Valoarea {0} este prea mare.", readValue);
+        }
+        else
+        {
+            Console.WriteLine("Valoarea {0} este prea mica.", readValue);
         }
     }
+    else Console.WriteLine("Input incorect! Incearca din nou.");
 }
