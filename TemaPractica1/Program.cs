@@ -1,4 +1,4 @@
-﻿using TemaPractica1;
+﻿using TemaIntervale;
 
 // methods are usually placed in the order of their call
 static int generateRandomInt(int lowerLimit, int upperLimit)
